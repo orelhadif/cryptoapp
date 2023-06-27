@@ -1,5 +1,7 @@
 const express =require('express');
+const inputValidator = require('../middlewares/input-validator');
 const router = express.Router();
+const { userSymbolValidator } = require('../controllers/users/validator')
 
 
 const logout= ('/logout',(req,res)=>{
@@ -18,6 +20,6 @@ router.get('/dashboard',dashboard)
 
 router.get('/logout',logout)
 
-router.get('/addSymbol',addSymbol)
+router.post('/addSymbol',inputValidator(userSymbolValidator),addSymbol)
 
 module.exports = router
