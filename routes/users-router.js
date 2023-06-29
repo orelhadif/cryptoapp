@@ -1,11 +1,11 @@
 const express =require('express');
 const inputValidator = require('../middlewares/input-validator');
 const router = express.Router();
-const mysql= require('../middlewares/mysql')
+const {middleware:db}= require('../middlewares/mysql')
 const { userSymbolValidator } = require('../controllers/users/validator')
-const UserSymbol = require('../models/insert-symbol')
+const UserSymbol = require('../models/mysql/insert-symbol')
 
-router.use(mysql)
+router.use(db)
 
 const logout= ('/logout',(req,res)=>{
     res.send('logout')

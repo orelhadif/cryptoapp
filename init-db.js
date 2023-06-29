@@ -1,11 +1,12 @@
 const mysql = require('mysql2');
 const util= require('util')
+const config= require('config')
 
 const connection= mysql.createConnection({
-    host: "localhost",
-    user: "username",
-    password:"password",
-    database: "mydb"
+    host: config.get('mysql.host'),
+    user: config.get('mysql.user'),
+    password: config.get('mysql.password'),
+    database: config.get('mysql.database'),
 });
 
 
@@ -20,7 +21,7 @@ const connection= mysql.createConnection({
         await connection.query(`
         CREATE TABLE users (
             id int auto_increment,
-            username varchar(255) not null,
+            github_id varchar(255) not null,
             primary key (id)
           )  
         `);

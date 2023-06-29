@@ -1,17 +1,9 @@
-const express =require('express');
-const router = express.Router();
+const express = require('express');
+const router = express.Router()
 
+const auth = require('../middlewares/auth');
 
-const auth= ('/auth',(req,res)=>{
-    res.send('authenticate')
-})
+router.get('/authenticate', auth.authenticate('github', { scope: [ 'user:email' ] })); 
+router.get('/callback', auth.authenticate('github', { failureRedirect: '/welcome', successRedirect: '/dashboard' }))
 
-const callback= ('/callback',(req,res)=>{
-    res.send('callback')
-})
-
-
-router.get('/auth', auth);
-router.get('/callback',callback)
-
-module.exports=router
+module.exports = router;
